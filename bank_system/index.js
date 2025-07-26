@@ -8,7 +8,7 @@ const app = express();
 const port = 3000;
 app.use(bodyParser.json());
 
-// POST /loans => LEND
+
 app.post('/api/v1/loans', (req, res) => {
   const { customer_id, loan_amount, loan_period, interest_rate } = req.body;
   const { total, emi } = calculateLoan(loan_amount, loan_period, interest_rate);
@@ -20,7 +20,7 @@ app.post('/api/v1/loans', (req, res) => {
   res.status(201).json({ loan_id, customer_id, total_amount: total, monthly_emi: emi });
 });
 
-// POST /loans/:loan_id/payments => PAYMENT
+
 app.post('/api/v1/loans/:loan_id/payments', (req, res) => {
   const { amount, payment_type } = req.body;
   const loan_id = req.params.loan_id;
@@ -46,7 +46,7 @@ app.post('/api/v1/loans/:loan_id/payments', (req, res) => {
   });
 });
 
-// GET /loans/:loan_id/ledger => LEDGER
+
 app.get('/api/v1/loans/:loan_id/ledger', (req, res) => {
   const loan_id = req.params.loan_id;
 
@@ -73,7 +73,7 @@ app.get('/api/v1/loans/:loan_id/ledger', (req, res) => {
   });
 });
 
-// GET /customers/:customer_id/overview => ACCOUNT OVERVIEW
+
 app.get('/api/v1/customers/:customer_id/overview', (req, res) => {
   const customer_id = req.params.customer_id;
 
